@@ -41,6 +41,10 @@ h1{
 	color: rgb(254, 254, 254);
 	line-height: 1.65;
 }
+.jumbotron h1{
+	margin: 0;
+
+}
 #aboutPic{
 	height: auto;
 }
