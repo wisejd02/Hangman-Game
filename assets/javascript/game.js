@@ -1,18 +1,16 @@
 var wordList = ["thanksgiving", "turkey", "football", "family", "friends", "pumpkin","food","harvest","autumn" ];
-var puzzleWord;
-var numTries;
-var wordListMax;
 var userGuess;
 var startValue;
 var arrayOfBlanks;
 var objGame = {};
-objGame.puzzleWord;
-objGame.numTries;
+//objGame.puzzleWord;
+//objGame.numTries;
 objGame.keyCount = -1;
 objGame.usedLetters = "";
 var elGameWord = document.getElementById('gameWord');
 var elSectHdr = document.getElementById('sectHdr');
 elSectHdr.innerHTML += '<br>Press any key to get started!';
+
 document.onkeypress=function(e){  
  if(objGame.keyCount === -1){
   elSectHdr.innerHTML = "Hangman <br> Press letters on keyboard to play "
