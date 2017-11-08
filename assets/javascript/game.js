@@ -1,4 +1,3 @@
-var wordList = ["thanksgiving", "turkey", "football", "family", "friends", "pumpkin","food","harvest","autumn" ];
 var userGuess;
 var startValue;
 var arrayOfBlanks = "_";
@@ -12,56 +11,67 @@ var elDivGmStats  = document.getElementById('divGmStats');
 var elImgHint =  document.getElementById('hint');
 var newDiv = document.createElement("div");
 var objGame = {};
-
 objGame.keyCount = -1;
 objGame.usedLetters = "";
 objGame.win = 0;
 objGame.lose = 0;
+objGame.wordList = ["thanksgiving", "turkey", "football", "family", "friends", "pumpkin","food","harvest","autumn" ];
 elSectHdr.innerHTML += '<br>Press any key to get started!';
 elJumbHdr.innerHTML = 'Used Letters';
 
-
+ //main code triggered by keypress
 document.onkeypress=function(e){ 
-  if(wordList.length == 0 && objGame.numTries == 0 ){
-
-  }else if(wordList.length == 0 && arrayOfBlanks.toString() == arrayWord.toString()) {
-    elGameWord.innerHTML ="You got the last word "+objGame.puzzleWord+" correct! ";
-    elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
-    elJumbMsg.innerHTML = "";
-    elImgHint.innerHTML = '<img src="assets/images/winner.jpeg" />';
-  }else if(objGame.keyCount === -1){
-    elSectHdr.innerHTML = "Hangman <br> Press letters on keyboard to play "
-    newGameWord();
-    objGame.keyCount ++;
+ if(isGameOver()){
+ }else if(isGameNew()){
+  elSectHdr.innerHTML = "Hangman <br> Press letters on keyboard to play "
+  newGameWord();
+  objGame.keyCount ++;
+ }else if(isString(e.keyCode )){
+  userGuess = e.key.toLowerCase();
+  startValue = 0;
+  if(letterUsed(userGuess)){
+   newDiv.innerHTML = "Already guessed that letter!";
+   elGameWord.appendChild(newDiv);
   }else{
-    if(e.keyCode >= 97 && e.keyCode <= 122||e.keyCode >= 65 && e.keyCode <= 90){
-      userGuess = e.key.toLowerCase();
-      startValue = 0;
-      if(objGame.usedLetters.indexOf(userGuess) === -1){
-        objGame.usedLetters += userGuess;
-        elJumbMsg.innerHTML = objGame.usedLetters;
-        objGame.keyCount ++;
-        checkInput(); 
-      }else{
-        newDiv.innerHTML = "Already guessed that letter!";
-        elGameWord.appendChild(newDiv);
-      }
-    }else{
-      newDiv.innerHTML = "Please enter a letter!";
-      elGameWord.appendChild(newDiv);
-    }
+   objGame.usedLetters += userGuess;
+   elJumbMsg.innerHTML = objGame.usedLetters;
+   objGame.keyCount ++;
+   checkInput();
+   
+  }
  }
- elDivGmStats.innerHTML = "Wins : " + objGame.win +
- "<br> Lose : " + objGame.lose
+
 }
 
+function isGameOver(){
+ if(objGame.wordList.length == 0 && objGame.numTries == 0 ){
+  //last word incorrect
+  elGameWord.innerHTML ="You did not get the last word correct! ";
+  elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
+  elJumbMsg.innerHTML = "";
+  elImgHint.innerHTML = '<img src="assets/images/turkeyEatsHuman.jpg" />';
+  return true;
+ }else if(objGame.wordList.length == 0 && arrayOfBlanks.toString() == arrayWord.toString()){
+  //last word correct"
+  elGameWord.innerHTML ="You got the last word "+objGame.puzzleWord+" correct! ";
+  elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
+  elJumbMsg.innerHTML = "";
+  elImgHint.innerHTML = '<img src="assets/images/winner.jpeg" />';
+  return true;
+ }
+}
+function isGameNew(){
+ if(objGame.keyCount === -1){
+  return true;
+ }
+}
 function newGameWord(){
   objGame.usedLetters = "";
   elJumbMsg.innerHTML = "";
-  if(wordList.length !== 0){
+  if(!isGameOver()){
     //randomly selects a word from the array of words
-    var ranNum = getRandomInt(0, wordList.length);
-    objGame.puzzleWord = wordList[ranNum];
+    var ranNum = getRandomInt(0, objGame.wordList.length);
+    objGame.puzzleWord = objGame.wordList[ranNum];
     elImgHint.innerHTML = '<img src="assets/images/'+objGame.puzzleWord+'.jpeg" />';
     objGame.numTries = parseInt(objGame.puzzleWord.length*.5);
     arrayWord = objGame.puzzleWord.split("")
@@ -70,12 +80,10 @@ function newGameWord(){
     arrayOfBlanks = arrayWord.map(function(a){
       return ' _ ';
     })
-    removeWord(wordList, objGame.puzzleWord);
+    removeWord(objGame.wordList, objGame.puzzleWord);
     elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+ insertSpaces(arrayOfBlanks);
-  }else{
-    elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
-    elGameWord.innerHTML ="";
-    elJumbMsg.innerHTML = "";
+  }else if(isGameOver()){
+   isGameOver();
   }
 }
 function getRandomInt(min, max) {
@@ -96,53 +104,64 @@ function insertSpaces(val) {
   }
   return aString.split("").join(" ");
 }
-
-
+function isString(val){
+ if(val >= 97 && val <= 122||val >= 65 && val <= 90){
+  return true;
+ }else{
+  newDiv.innerHTML = "Please enter a letter!";
+  elGameWord.appendChild(newDiv);
+ }
+}
+function letterUsed(val){
+ if(objGame.usedLetters.indexOf(val) !== -1){
+  return true;
+ }
+}
 function checkInput(){
+ console.log("check input");
   elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
   elSectMsg.innerHTML = "";
   while (objGame.puzzleWord.indexOf(userGuess, startValue) !== -1) {   
     startValue = objGame.puzzleWord.indexOf(userGuess, startValue) + 1;
-    console.log(startValue);
-    arrayOfBlanks[startValue-1] = userGuess;
-    // replace letter
-    // remove letter
-    // fill blanks
-    elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
-    if(arrayOfBlanks.toString() == arrayWord.toString()){
-      elGameWord.innerHTML = objGame.puzzleWord + "<br>"
-      +"HOORAY You got the word right!! "+
-      "You had "+objGame.keyCount+" guesses!!";
-      objGame.win++;
-      document.getElementById('sectHdr').innerHTML = 'Press any key to play next word!';
-      objGame.keyCount = -1;
-    }
+    goodGuess();
+   
   }
-  if(!startValue){
-    objGame.numTries--;
-    elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
-    if(objGame.numTries === 0){
-      objGame.lose++;
-      objGame.keyCount = 0;
-      if(wordList.length !== 0){
-        elSectMsg.innerHTML = "You lost!! Try next word!";
-        newGameWord();
-      }else{
-        if(objGame.numTries>0){
-          
-          elGameWord.innerHTML ="You got the last word "+objGame.puzzleWord+" correct! ";
-          
-        }else{
-          
-          elGameWord.innerHTML ="You did not get the last word correct! ";
-          elImgHint.innerHTML = '<img src="assets/images/turkeyEatsHuman.jpg" />';
-          
-        }
-        elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
-        elJumbMsg.innerHTML = "";
-        
-      }
-    }
+  goodGuess();
   }
-  
+ 
+
+function goodGuess(){
+ if(!startValue && objGame.numTries>0){
+  console.log("!startValue && objGame.numTries>0");
+  objGame.numTries--;
+  elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
+   if(objGame.numTries === 0){
+    elSectMsg.innerHTML = "You lost!! Try next word!";
+    objGame.lose++;
+    updateScore();
+    newGameWord();
+   }
+ }else if(startValue && arrayOfBlanks.toString() == arrayWord.toString()){
+  console.log("startValue && arrayOfBlanks.toString() == arrayWord.toString()");
+  elGameWord.innerHTML = objGame.puzzleWord + "<br>"
+  +"HOORAY You got the word right!! "+
+  "You had "+objGame.keyCount+" guesses!!";
+  objGame.win++;
+  updateScore();
+  document.getElementById('sectHdr').innerHTML = 'Press any key to play next word!';
+  objGame.keyCount = -1;
+ }else {
+  console.log("else");
+  // replace letter
+  // remove letter
+  // fill blanks
+  arrayOfBlanks[startValue-1] = userGuess;
+  elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
+ }
+ 
+}
+
+function updateScore(){
+ elDivGmStats.innerHTML = "Wins : " + objGame.win +
+ "<br> Lose : " + objGame.lose;
 }
