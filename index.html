@@ -7,86 +7,79 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-		<style>
-				.wrapper {
-					background-image: url("assets/images/FallThxGvngWll.jpg");
-					-webkit-background-size: cover;
-					-moz-background-size: cover;
-					-o-background-size: cover;
-					background-size: cover;
-					
-				}
-		</style>
-	</head>
-	<body>
+  		<style>
+    		.wrapper {
+				background-image: url("assets/images/FallThxGvngWll.jpg");
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+     
+    		}
+   
+  		</style>
+ 	</head>
+ 	<body>
 		<div class="wrapper" >
 			<header>
-				<nav class="navbar navbar-default">
-					<div class="container-fluid">
+					<nav class="navbar navbar-default">
+						<div class="container-fluid">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-						  	</button>
-							<h1>Joshua Wise</h1>
-						</div>
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav navbar-right" >
-								<li><a href="index.html">About</a></li>
-								<li><a href="portfolio.html">Portfolio</a></li>
-								<li><a href="contact.html">Contact</a></li>
-							</ul>
-						</div>
-					</div><!-- /.container-fluid -->
-				</nav>
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+								<h1>Joshua Wise</h1>
+							</div>
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+									<ul class="nav navbar-nav navbar-right" >
+										<li><a href="index.html">About</a></li>
+										<li><a href="portfolio.html">Portfolio</a></li>
+										<li><a href="contact.html">Contact</a></li>
+									</ul>
+							</div>
+						</div><!-- /.container-fluid -->
+					</nav>
 			</header>
 			<div id="main" >
-				<div class="row" >
-					<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-						<section>
-							<h2 id="sectHdr">Hangman Game</h2>
-							<hr>
-							<p id="gameWord"></p>
-							<div class="jumbotron">
-								<div class="container">
-									<h1>Hello, world!</h1>
-									<p>...</p>
-									<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-								</div>
-							</div>	
-			
-						</section>
-							
-					</div>	
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<aside>
-							<h2 class="cnctHdr" >Connect with Me</h2>
-							<hr>
-							<a class="icoSMGap icoMDalign" href="#">
-								<img class="imgIco" border="0" alt="Github" src="#" width="40" height="40">
-							</a>
-							<a class="icoSMGap" href="#">
-								<img class="imgIco" alt="Linkedin" src="#" width="40" height="40">
-							</a>
-							<a class="icoSMGap" href="#">
-								<img class="imgIco" alt="Stack Overflow" src="#" width="40" height="40">
-							</a>
-						</aside>
+					<div class="row" >
+						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+							<section>
+								<h2 id="sectHdr">Hangman Game</h2>
+								<hr>
+								<div id="sectMsg"></div>
+								<p id="gameWord"></p>
+								<div class="jumbotron">
+									<div class="container">
+										<h1 id="jumbHdr"></h1>
+										<p id="jumbMsg"></p>
+										<div id="hint"></div>
+									</div>
+								</div> 
+					
+							</section>
+					
+						</div> 
+						<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+							<aside>
+								<h2 class="cnctHdr" >Game Stats</h2>
+								<hr>
+								<div id="divGmStats" class="gmStats"></div>
+							</aside>
+						</div>
 					</div>
 				</div>
-			</div>
-			<footer>
-				<hr id="footerSep">
-				<sub>&copy Copyright 2017 Joshua Wise</sub>
+				<footer>
+					<hr id="footerSep">
+					<sub>&copy Copyright 2017 Joshua Wise</sub>
 				
 			</footer>
 		</div>
-	</body>
-
-	<!-- Latest compiled and minified JavaScript -->	
+ 	</body>
+	<!-- Latest compiled and minified JavaScript --> 
 	<script src="https://code.jquery.com/jquery-2.2.1.js" integrity="sha256-eNcUzO3jsv0XlJLveFEkbB8bA7/CroNpNVk3XpmnwHc=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="assets/javascript/game.js"></script>
