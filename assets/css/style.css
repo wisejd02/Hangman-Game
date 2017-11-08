@@ -86,7 +86,11 @@ body {
 	width: 100%;
 	background:rgb(238, 239, 238);
 	height: 900px;
-	
+	background-image: url("../images/FallThxGvngWll.jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 #main{
 	margin: 0 auto;
