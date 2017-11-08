@@ -71,7 +71,7 @@ function newGameWord(){
       return ' _ ';
     })
     removeWord(wordList, objGame.puzzleWord);
-    elGameWord.innerHTML = "You have "+objGame.numTries+" misses left to guess word! <br> "+ insertSpaces(arrayOfBlanks);
+    elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+ insertSpaces(arrayOfBlanks);
   }else{
     elSectHdr.innerHTML = "Played all words in word list!! Game Over!"
     elGameWord.innerHTML ="";
@@ -99,7 +99,7 @@ function insertSpaces(val) {
 
 
 function checkInput(){
-  elGameWord.innerHTML = "You have "+objGame.numTries+" misses left to guess word! <br> "+insertSpaces(arrayOfBlanks);
+  elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
   elSectMsg.innerHTML = "";
   while (objGame.puzzleWord.indexOf(userGuess, startValue) !== -1) {   
     startValue = objGame.puzzleWord.indexOf(userGuess, startValue) + 1;
@@ -108,7 +108,7 @@ function checkInput(){
     // replace letter
     // remove letter
     // fill blanks
-    elGameWord.innerHTML = "You have "+objGame.numTries+" misses left to guess word! <br> "+insertSpaces(arrayOfBlanks);
+    elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
     if(arrayOfBlanks.toString() == arrayWord.toString()){
       elGameWord.innerHTML = objGame.puzzleWord + "<br>"
       +"HOORAY You got the word right!! "+
@@ -120,7 +120,7 @@ function checkInput(){
   }
   if(!startValue){
     objGame.numTries--;
-    elGameWord.innerHTML = "You have "+objGame.numTries+" misses left to guess word! <br> "+insertSpaces(arrayOfBlanks);
+    elGameWord.innerHTML = "You have "+objGame.numTries+" incorrect letters left to guess word! <br> "+insertSpaces(arrayOfBlanks);
     if(objGame.numTries === 0){
       objGame.lose++;
       objGame.keyCount = 0;
