@@ -51,7 +51,6 @@ document.onkeypress=function(e){
       elGameWord.appendChild(newDiv);
     }
  }
- console.log(objGame);
  elDivGmStats.innerHTML = "Wins : " + objGame.win +
  "<br> Lose : " + objGame.lose
 }
@@ -116,11 +115,6 @@ function checkInput(){
       "You had "+objGame.keyCount+" guesses!!";
       objGame.win++;
       document.getElementById('sectHdr').innerHTML = 'Press any key to play next word!';
-      //if(wordList == undefined){
-        //objGame.usedLetters = "";
-        //break; 
-      //}
-      keyCount = -1;
       objGame.keyCount = -1;
     }
   }
