@@ -69,6 +69,7 @@ function newGameWord(){
   objGame.usedLetters = "";
   elJumbMsg.innerHTML = "";
   if(!isGameOver()){
+    objGame.keyCount = 0;
     //randomly selects a word from the array of words
     var ranNum = getRandomInt(0, objGame.wordList.length);
     objGame.puzzleWord = objGame.wordList[ranNum];
